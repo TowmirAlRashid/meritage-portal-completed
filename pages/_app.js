@@ -1,7 +1,7 @@
 
 import '../styles/globals.css'
 import { CacheProvider } from '@emotion/react';
-import BlankLayout from "../BlankLayout/BlankLayout";
+import BlankLayout from "../layouts/BlankLayout/BlankLayout";
 import { CssBaseline } from '@mui/material';
 import createEmotionCache from '../src/createEmotionCache'
 

@@ -26,6 +26,7 @@ import ProfileOrLogout from '../../components/profile';
 //mobile view
 import TopHeader from "../../components/mobile/TopHeader"
 import Navbar from "../../components/mobile/Navbar"
+import { set } from 'react-hook-form';
 
 
 const drawerWidth = 200;
@@ -109,6 +110,9 @@ export default function MainLayout({ children }) {
   const handleDrawerAction = () => {
     setOpen(!open);
   };
+
+
+  const [navState, setNavState] = React.useState("Dashboard")
 
 
   return (
@@ -245,7 +249,7 @@ export default function MainLayout({ children }) {
 
         {children}
 
-        <Navbar />
+        <Navbar navState={navState} setNavState={setNavState} />
       </Box>
     </Box>
   );

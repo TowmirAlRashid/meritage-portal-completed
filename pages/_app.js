@@ -9,7 +9,7 @@ import createEmotionCache from '../src/createEmotionCache'
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-function MyApp({ Component, pageProps, emotionCache = clientSideEmotionCache, }) {
+function MeritagePortal({ Component, pageProps, emotionCache = clientSideEmotionCache, }) {
   return (
     <CacheProvider value={emotionCache}>
       <CssBaseline />
@@ -20,4 +20,4 @@ function MyApp({ Component, pageProps, emotionCache = clientSideEmotionCache, })
   )
 }
 
-export default MyApp
+export default MeritagePortal

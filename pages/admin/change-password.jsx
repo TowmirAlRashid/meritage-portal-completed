@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material"
+import { Box, Button, TextField, Typography, useMediaQuery, useTheme } from "@mui/material"
 import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import BackToAdmin from "../../components/backToAdmin"
@@ -36,288 +36,297 @@ const PasswordChange = () => {
         router.push("/login")
       }
 
+      const theme = useTheme();
+      const lgSize = useMediaQuery(theme.breakpoints.up('lg'));
+      const mdSize = useMediaQuery(theme.breakpoints.up('md'));
+      const smSize = useMediaQuery(theme.breakpoints.up('sm'));
+      const xsSize = useMediaQuery(theme.breakpoints.up('xs'));
+
   return (
     <>
         <MainLayout>
-            <Box
-                sx={{
-                    display: {
-                        lg: "block",
-                        md: "block",
-                        sm: "none",
-                        xs: "none",
-                    }
-                }}
-            >
-                <BackToAdmin text="Change Password" />
+            <Box>
+                {
+                    lgSize || mdSize && !(smSize && xsSize) ?  
+                        <BackToAdmin text="Change Password" /> :
+                        <Typography 
+                            sx={{
+                                fontSize: "1.25rem",
+                                fontWeight: "bold",
+                                display: "block",
+                                margin: "1.5rem 1rem 1rem"
+                            }}
+                        >
+                            Change Password
+                        </Typography>
+                }
 
                 <Box
                     sx={{
-                    backgroundColor: "white",
-                    borderRadius: "15px",
-                    marginRight: "1rem",
-                    mb: 10,
+                        display: {
+                            lg: "block",
+                            md: "block",
+                            sm: "flex",
+                            xs: "flex"
+                        },
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "center",
+                        height: "100%",
+                        overflowY: "scroll",
+                        pb: "7rem"
                     }}
                 >
                     <Box
-                    component="form"
-                    onSubmit={handleSubmit(onsubmit)}
-                    sx={{
-                        padding: "3rem 2rem 2rem"
-                    }}
+                        sx={{
+                            backgroundColor: "white",
+                            borderRadius: "15px",
+                            marginRight: "1rem",
+                            marginLeft: "1rem",
+                            width: "90%",
+                            margin: "0 5% 0",
+                            mb: 10
+                        }}
                     >
                         <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "flex-start",
-                            alignItems: "center",
-                            marginBottom: "1.5rem"
-                        }}
-                        >
-                            <label id='currentPass' style={{ width: "15rem"}}>Current Password</label>
-                            <Controller
-                            name="current password"
-                            control={control}
-                            render={({ field }) => {
-                                return (
-                                    <TextField 
-                                        id="currentPass" 
-                                        variant="outlined"
-                                        {...field} 
-                                        type="password"
-                                        sx={{ width: "60%", "& .MuiInputBase-input": { padding: "10px 8px"}}}
-                                    />
-                                )
+                            component="form"
+                            onSubmit={handleSubmit(onsubmit)}
+                            sx={{
+                                padding: {
+                                    lg: "3rem 2rem 2rem",
+                                    md: "3rem 2rem 2rem",
+                                    sm: "2rem 1rem 2rem",
+                                    xs: "2rem 1rem 2rem"
+                                },
                             }}
-                        />
-                        </Box>
-
-                        <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "flex-start",
-                            alignItems: "center",
-                            marginBottom: "1.5rem"
-                        }}
                         >
-                            <label id='newPass' style={{ width: "15rem"}}>New Password</label>
-                            <Controller
-                            name="new password"
-                            control={control}
-                            render={({ field }) => {
-                                return (
-                                    <TextField 
-                                        id="newPass" 
-                                        variant="outlined"
-                                        {...field} 
-                                        type="password"
-                                        sx={{ width: "60%", "& .MuiInputBase-input": { padding: "10px 8px"}}}
-                                    />
-                                )
-                            }}
-                        />
-                        </Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: {
+                                        lg: "row",
+                                        md: "row",
+                                        sm: "column",
+                                        xs: "column"
+                                    },
+                                    justifyContent: "flex-start",
+                                    alignItems: {
+                                        lg: "center",
+                                        md: "center",
+                                        sm: "flex-start",
+                                        xs: "flex-start"
+                                    },
+                                    marginBottom: "1.5rem",
+                                    gap: {
+                                        lg: "0",
+                                        md: "0",
+                                        sm: "8px",
+                                        xs: "8px"
+                                    }
+                                }}
+                            >
+                                <label id='currentPass' style={{ width: "15rem"}}>Current Password</label>
+                                <Controller
+                                    name="current password"
+                                    control={control}
+                                    render={({ field }) => {
+                                        return (
+                                            <TextField 
+                                                id="currentPass" 
+                                                variant="outlined"
+                                                {...field} 
+                                                type="password"
+                                                sx={{ 
+                                                    "& .MuiInputBase-input": {
+                                                        padding: {
+                                                            lg: "10px 8px",
+                                                            md: "10px 8px",
+                                                            sm: "8px 6px",
+                                                            xs: "8px 6px"
+                                                        }
+                                                    },
+                                                    width: {
+                                                        lg: "60%",
+                                                        md: "60%",
+                                                        sm: "100%",
+                                                        xs: "100%"
+                                                    }
+                                                }}
+                                            />
+                                        )
+                                    }}
+                                />
+                            </Box>
 
-                        <Box
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: {
+                                        lg: "row",
+                                        md: "row",
+                                        sm: "column",
+                                        xs: "column"
+                                    },
+                                    justifyContent: "flex-start",
+                                    alignItems: {
+                                        lg: "center",
+                                        md: "center",
+                                        sm: "flex-start",
+                                        xs: "flex-start"
+                                    },
+                                    marginBottom: "1.5rem",
+                                    gap: {
+                                        lg: "0",
+                                        md: "0",
+                                        sm: "8px",
+                                        xs: "8px"
+                                    }
+                                }}
+                            >
+                                <label id='newPass' style={{ width: "15rem"}}>New Password</label>
+                                <Controller
+                                name="new password"
+                                control={control}
+                                render={({ field }) => {
+                                    return (
+                                        <TextField 
+                                            id="newPass" 
+                                            variant="outlined"
+                                            {...field} 
+                                            type="password"
+                                            sx={{ 
+                                                "& .MuiInputBase-input": {
+                                                    padding: {
+                                                        lg: "10px 8px",
+                                                        md: "10px 8px",
+                                                        sm: "8px 6px",
+                                                        xs: "8px 6px"
+                                                    }
+                                                },
+                                                width: {
+                                                    lg: "60%",
+                                                    md: "60%",
+                                                    sm: "100%",
+                                                    xs: "100%"
+                                                }
+                                            }}
+                                        />
+                                    )
+                                }}
+                            />
+                            </Box>
+
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: {
+                                        lg: "row",
+                                        md: "row",
+                                        sm: "column",
+                                        xs: "column"
+                                    },
+                                    justifyContent: "flex-start",
+                                    alignItems: {
+                                        lg: "center",
+                                        md: "center",
+                                        sm: "flex-start",
+                                        xs: "flex-start"
+                                    },
+                                    marginBottom: "1.5rem",
+                                    gap: {
+                                        lg: "0",
+                                        md: "0",
+                                        sm: "8px",
+                                        xs: "8px"
+                                    }
+                                }}
+                            >
+                                <label id='confirmNewPass' style={{ width: "15rem"}}>Confirm New Password</label>
+                                <Controller
+                                name="confirm new password"
+                                control={control}
+                                render={({ field }) => {
+                                    return (
+                                        <TextField 
+                                            id="confirmNewPass" 
+                                            variant="outlined"
+                                            {...field} 
+                                            type="password"
+                                            sx={{ 
+                                                "& .MuiInputBase-input": {
+                                                    padding: {
+                                                        lg: "10px 8px",
+                                                        md: "10px 8px",
+                                                        sm: "8px 6px",
+                                                        xs: "8px 6px"
+                                                    }
+                                                },
+                                                width: {
+                                                    lg: "60%",
+                                                    md: "60%",
+                                                    sm: "100%",
+                                                    xs: "100%"
+                                                }
+                                            }}
+                                        />
+                                    )
+                                }}
+                            />
+                            </Box>
+
+                            <Button
+                                type='submit'
+                                onClick={handleUpdateClick({
+                                    vertical: 'bottom',
+                                    horizontal: 'right',
+                                })}
+                                variant="contained"
+                                sx={{ 
+                                    height: {
+                                        lg: "3rem",
+                                        md: "3rem",
+                                        sm: "2.25rem",
+                                        xs: "2.25rem"
+                                    }, 
+                                    width: {
+                                        lg: "8rem",
+                                        md: "8rem",
+                                        sm: "80%",
+                                        xs: "80%"
+                                    }, 
+                                    backgroundColor: "#0B4CCB" ,
+                                    margin: {
+                                        sm: "2rem 10%",
+                                        xs: "2rem 10%",
+                                        lg: "2rem 0",
+                                        md: "2rem 0"
+                                    }
+                                }}
+                            >
+                                Update
+                            </Button>
+                        </Box>
+                    </Box>
+
+                    <Box
                         sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "flex-start",
-                            alignItems: "center",
-                            marginBottom: "2.5rem"
+                            display: {
+                                lg: "none",
+                                md: "none",
+                                sm: "block",
+                                xs: "block"
+                            },
+                            width: "66%"
                         }}
-                        >
-                            <label id='confirmNewPass' style={{ width: "15rem"}}>Confirm New Password</label>
-                            <Controller
-                            name="confirm new password"
-                            control={control}
-                            render={({ field }) => {
-                                return (
-                                    <TextField 
-                                        id="confirmNewPass" 
-                                        variant="outlined"
-                                        {...field} 
-                                        type="password"
-                                        sx={{ width: "60%", "& .MuiInputBase-input": { padding: "10px 8px"} }}
-                                    />
-                                )
-                            }}
-                        />
-                        </Box>
-
+                    >
                         <Button
-                        type='submit'
-                        onClick={handleUpdateClick({
-                            vertical: 'bottom',
-                            horizontal: 'right',
-                        })}
-                        variant="contained"
-                        sx={{ height: "3rem", width: "8rem", backgroundColor: "#0B4CCB" }}
+                            variant='outlined'
+                            fullWidth
+                            onClick={handleLogOut}
                         >
-                        Update
+                            Logout
                         </Button>
                     </Box>
-                </Box>
-            </Box>
-
-            <Box                // mobile view
-                sx={{
-                    display: {
-                        lg: "none",
-                        md: "none",
-                        sm: "block",
-                        xs: "block",
-                    }
-                }}
-            >
-                <Typography 
-                    sx={{
-                        fontSize: "1.25rem",
-                        fontWeight: "bold",
-                        display: "block",
-                        margin: "1.5rem 1rem 0"
-                    }}
-                >
-                    Change Password
-                </Typography>
-
-                <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    alignItems: "center",
-                    height: "100%",
-                    overflowY: "scroll",
-                    pb: "7rem"
-                }}
-                >
-                <Box
-                    sx={{
-                    backgroundColor: "white",
-                    width: "92%",
-                    borderRadius: "15px",
-                    margin: "1rem auto 3rem",
-                    padding: "1.5rem 1rem 2rem"
-                    }}
-                    component="form"
-                    onSubmit={handleSubmit(onsubmit)}
-                >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "flex-start",
-                            alignItems: "flex-start",
-                            marginBottom: "1.5rem",
-                            gap: "8px"
-                        }}
-                        >
-                            <label id='currentPass' style={{ width: "10rem", fontSize: "16px"}}>Current Password</label>
-                            <Controller
-                            name="current password"
-                            control={control}
-                            render={({ field }) => {
-                                return (
-                                    <TextField 
-                                        id="currentPass" 
-                                        variant="outlined"
-                                        {...field} 
-                                        type="password"
-                                        sx={{ "& .MuiInputBase-input": { padding: "8px 6px"}}}
-                                        fullWidth
-                                    />
-                                )
-                            }}
-                        />
-                        </Box>
-
-                        <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "flex-start",
-                            alignItems: "flex-start",
-                            marginBottom: "1.5rem",
-                            gap: "8px"
-                        }}
-                        >
-                            <label id='newPass' style={{ width: "10rem", fontSize: "14px"}}>New Password</label>
-                            <Controller
-                            name="new password"
-                            control={control}
-                            render={({ field }) => {
-                                return (
-                                    <TextField 
-                                        id="newPass" 
-                                        variant="outlined"
-                                        {...field} 
-                                        type="password"
-                                        sx={{"& .MuiInputBase-input": { padding: "8px 6px"}}}
-                                        fullWidth
-                                    />
-                                )
-                            }}
-                        />
-                        </Box>
-
-                        <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "flex-start",
-                            alignItems: "flex-start",
-                            marginBottom: "2.5rem",
-                            gap: "8px"
-                        }}
-                        >
-                            <label id='confirmNewPass' style={{ width: "10rem", fontSize: "14px"}}>Confirm New Password</label>
-                            <Controller
-                            name="confirm new password"
-                            control={control}
-                            render={({ field }) => {
-                                return (
-                                    <TextField 
-                                        id="confirmNewPass" 
-                                        variant="outlined"
-                                        {...field} 
-                                        type="password"
-                                        sx={{ "& .MuiInputBase-input": { padding: "8px 6px"} }}
-                                        fullWidth
-                                    />
-                                )
-                            }}
-                        />
-                        </Box>
-
-                    <Button
-                        type='submit'
-                        onClick={handleUpdateClick({
-                            vertical: 'bottom',
-                            horizontal: 'right',
-                        })}
-                        variant="contained"
-                        sx={{ height: "2.25rem", width: "80%", margin: "auto 10%", backgroundColor: "#0B4CCB" }}
-                    >
-                        Update
-                    </Button>
-                </Box>
-
-                <Box
-                    sx={{
-                    width: "66%"
-                    }}
-                >
-                    <Button
-                        variant='outlined'
-                        fullWidth
-                        onClick={handleLogOut}
-                    >
-                        Logout
-                    </Button>
-                </Box>
                 </Box>
             </Box>
 

@@ -1,9 +1,19 @@
 import { Box, Card, CardContent, Divider, Typography } from '@mui/material'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 const CardToEngagement = ({ index, name, creationDate, stage }) => {
+    const router = useRouter()
+
+    const handleCardClick = () => {
+        router.push(`/admin/${index}`)
+    }
+
   return (
-    <Card sx={{ width: "100%", boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.15)" }}>
+    <Card 
+        sx={{ width: "100%", boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.15)", cursor: "pointer" }}
+        onClick={handleCardClick}
+    >
       <CardContent>
         <Box
             sx={{

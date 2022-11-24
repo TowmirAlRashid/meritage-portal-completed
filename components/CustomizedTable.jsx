@@ -211,7 +211,8 @@ const xsSize = useMediaQuery('(max-width:600px)');
                                                     {row.id}
                                                 </TableCell>
                                                 <TableCell sx={{ paddingLeft: "1rem"}}>
-                                                    <Link href={`/admin/${row.eng_name}`}>
+                                                    {/* this link pushes you to the individual engagement details */}
+                                                    <Link href={`/admin/${row.id}`}>
                                                         <a style={{ color: "#0288D1" }}>{row.eng_name}</a>
                                                     </Link>
                                                 </TableCell>
@@ -245,13 +246,15 @@ const xsSize = useMediaQuery('(max-width:600px)');
                                     ?.filter((_, index) => index >= ((page - 1) * entries) && index < (page * entries))     // filter on page change or number of entries
                                     ?.map((row, index) => {
                                         return (
-                                            <CardToEngagement 
-                                                key={row.id} 
-                                                index={row.id}
-                                                name={row.eng_name}
-                                                creationDate={row.eng_date} 
-                                                stage={row.eng_stage}
-                                            />
+                                            <Link key={row.id} href={`/admin/${row.id}`}>
+                                                <CardToEngagement 
+                                                    key={row.id} 
+                                                    index={row.id}
+                                                    name={row.eng_name}
+                                                    creationDate={row.eng_date} 
+                                                    stage={row.eng_stage}
+                                                />
+                                            </Link>
                                         )
                                     })
                                 }

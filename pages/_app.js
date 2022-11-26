@@ -13,7 +13,7 @@ import { useState } from 'react';
 const clientSideEmotionCache = createEmotionCache();
 
 function MeritagePortal({ Component, pageProps, emotionCache = clientSideEmotionCache, }) {
-  const [value, setValue] = useState("Record Details");
+  const [value, setValue] = useState("Record Details"); // state that decides the nested navbar values
 
   return (
     <CacheProvider value={emotionCache}>

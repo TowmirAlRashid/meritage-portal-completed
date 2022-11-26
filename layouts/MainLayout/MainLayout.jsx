@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import Image from "next/image"
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -15,6 +15,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 import Logo from "../../assets/Logo.png";
 import MiniLogo from "../../assets/minilogo.png";
@@ -26,9 +27,7 @@ import ProfileOrLogout from '../../components/profile';
 //mobile view
 import TopHeader from "../../components/mobile/TopHeader"
 import Navbar from "../../components/mobile/Navbar"
-
-import { useContext } from 'react';
-import AppContext from '../../AppContext';
+import { useRouter } from 'next/router';
 
 
 
@@ -107,14 +106,24 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MainLayout({ children }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const handleDrawerAction = () => {
     setOpen(!open);
   };
 
+  const router = useRouter()
+  const routeString = router.pathname.toString()
 
   const [navState, setNavState] = useState("Dashboard")
+
+  const handleDashboardClick = () => {
+    router.push("/admin")
+  }
+
+  const handleEngagementsClick = () => {
+    router.push("/all-engagements")
+  }
 
 
   return (
@@ -170,33 +179,61 @@ export default function MainLayout({ children }) {
             >
               <Box>
                 <List>
-                  {['Dashboard'].map((text) => (
-                    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                      <ListItemButton
+                  <ListItem disablePadding sx={{ display: 'block' }}>
+                    <ListItemButton
+                      sx={{
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
+                        backgroundColor: `${routeString === "/admin" ? "#0B4CCB" : "white"}`,
+                        "&:hover": {
+                          backgroundColor: `${routeString === "/admin" ? "#0B4CCB" : "white"}`
+                        }
+                      }}
+                      onClick={handleDashboardClick}
+                    >
+                      <ListItemIcon
                         sx={{
-                          minHeight: 48,
-                          justifyContent: open ? 'initial' : 'center',
-                          px: 2.5,
-                          backgroundColor: "#0B4CCB",
-                          "&:hover": {
-                            backgroundColor: "#0B4CCB !important"
-                          }
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
                         }}
                       >
-                        <ListItemIcon
-                          sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                            color: "white"
-                          }}
-                        >
-                          <DashboardIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={text} sx={{ opacity: open ? 1 : 0, color: "white" }} />
-                      </ListItemButton>
-                    </ListItem>
-                  ))}
+                        <DashboardIcon sx={{
+                          color: `${routeString === "/admin" ? "white" : "rgba(0, 0, 0, 0.6)"}`
+                        }} />
+                      </ListItemIcon>
+                      <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0, color: `${routeString === "/admin" ? "white" : "rgba(0, 0, 0, 0.6)"}` }} />
+                    </ListItemButton>
+                  </ListItem>
+
+                  <ListItem disablePadding sx={{ display: 'block' }}>
+                    <ListItemButton
+                      sx={{
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
+                        backgroundColor: `${routeString === "/all-engagements" ? "#0B4CCB" : "white"}`,
+                        "&:hover": {
+                          backgroundColor: `${routeString === "/all-engagements" ? "#0B4CCB" : "white"}`
+                        }
+                      }}
+                      onClick={handleEngagementsClick}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <PeopleAltIcon sx={{
+                          color: `${routeString === "/all-engagements" ? "white" : "rgba(0, 0, 0, 0.6)"}`
+                        }} />
+                      </ListItemIcon>
+                      <ListItemText primary="All Engagements" sx={{ opacity: open ? 1 : 0, color: `${routeString === "/all-engagements" ? "white" : "rgba(0, 0, 0, 0.6)"}` }} />
+                    </ListItemButton>
+                  </ListItem>
                 </List>
               </Box>
             </Box>

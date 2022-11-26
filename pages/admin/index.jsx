@@ -70,8 +70,6 @@ const AdminDashboard = () => {
     setPage(value);
   };
 
-  console.log(data)
-
   return (
     <>
         <MainLayout>

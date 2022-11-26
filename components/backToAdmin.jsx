@@ -17,6 +17,8 @@ const BackToAdmin = ({ text }) => {
             justifyContent: "flex-start",
             alignItems: "center",
             gap: "0.2rem",
+            mt: "1.4rem",
+            ml: "1rem",
             marginBottom: "1.4rem"
         }}
     >

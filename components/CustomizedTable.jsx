@@ -246,15 +246,13 @@ const xsSize = useMediaQuery('(max-width:600px)');
                                     ?.filter((_, index) => index >= ((page - 1) * entries) && index < (page * entries))     // filter on page change or number of entries
                                     ?.map((row, index) => {
                                         return (
-                                            <Link key={row.id} href={`/admin/${row.id}`}>
-                                                <CardToEngagement 
-                                                    key={row.id} 
-                                                    index={row.id}
-                                                    name={row.eng_name}
-                                                    creationDate={row.eng_date} 
-                                                    stage={row.eng_stage}
-                                                />
-                                            </Link>
+                                            <CardToEngagement 
+                                                key={row.id} 
+                                                index={row.id}
+                                                name={row.eng_name}
+                                                creationDate={row.eng_date} 
+                                                stage={row.eng_stage}
+                                            />
                                         )
                                     })
                                 }

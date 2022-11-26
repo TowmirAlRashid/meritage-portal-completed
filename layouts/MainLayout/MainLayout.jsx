@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from 'react';
 import Image from "next/image"
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -26,7 +26,10 @@ import ProfileOrLogout from '../../components/profile';
 //mobile view
 import TopHeader from "../../components/mobile/TopHeader"
 import Navbar from "../../components/mobile/Navbar"
-import { set } from 'react-hook-form';
+
+import { useContext } from 'react';
+import AppContext from '../../AppContext';
+
 
 
 const drawerWidth = 200;
@@ -104,153 +107,153 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MainLayout({ children }) {
-  const [open, setOpen] = React.useState(false);
-
+  const [open, setOpen] = useState(false);
 
   const handleDrawerAction = () => {
     setOpen(!open);
   };
 
 
-  const [navState, setNavState] = React.useState("Dashboard")
+  const [navState, setNavState] = useState("Dashboard")
 
 
   return (
-    <Box
-      sx={{
-        width: "100vw",
-        height: "100% !important",
-        backgroundColor: "#F5F5F5",
-        overflowY: "auto",
-      }}
-    >
-      <Box // web and tab view
-        sx={{ 
-          display: {
-            lg: 'flex',
-            md: 'flex',
-            sm: "none",
-            xs: "none"
-          },
-          width: "100%",
-          height: "100vh" 
-        }}>
-        <CssBaseline />
-
-        <Drawer variant="permanent" open={open}>
-          <DrawerHeader
-            sx={{
-              display: "flex",
-              justifyContent: "center"
-            }}
-          >
-            {open ? 
-              <Box sx={{ width: { lg: "11.4rem", md: "10rem" }}}>
-                <Image
-                  src={Logo}
-                  alt="client logo"
-                />
-              </Box> :
-              <Image 
-                src={MiniLogo}
-                alt="client Mini logo"
-              />}
-          </DrawerHeader>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              height: '100vh'
-            }}
-          >
-            <Box>
-              <List>
-                {['Dashboard'].map((text) => (
-                  <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                    <ListItemButton
-                      sx={{
-                        minHeight: 48,
-                        justifyContent: open ? 'initial' : 'center',
-                        px: 2.5,
-                        backgroundColor: "#0B4CCB",
-                        "&:hover": {
-                          backgroundColor: "#0B4CCB !important"
-                        }
-                      }}
-                    >
-                      <ListItemIcon
-                        sx={{
-                          minWidth: 0,
-                          mr: open ? 3 : 'auto',
-                          justifyContent: 'center',
-                          color: "white"
-                        }}
-                      >
-                        <DashboardIcon />
-                      </ListItemIcon>
-                      <ListItemText primary={text} sx={{ opacity: open ? 1 : 0, color: "white" }} />
-                    </ListItemButton>
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
-          </Box>
-        </Drawer>
-
-        <AppBar position="fixed" open={open}>
-          <Toolbar>
-            <IconButton 
-              onClick={handleDrawerAction}
-              sx={{
-                border: "1px solid black",
-                borderRadius: "50%",
-                marginRight: "1.2rem"
-              }}
-            >
-              {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
-            
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end"
-              }}
-            >
-              <ProfileOrLogout />
-            </Box>
-          </Toolbar>
-        </AppBar>
-
-        <Box component="main" sx={{ flexGrow: 1, p: 3, width: "100%", height: '100vh', backgroundColor: "#F5F5F5"}}>
-          
-          <DrawerHeader />
-          
-          {children}
-        </Box>
-      </Box>
-
-      <Box              // mobile view
-        sx={{ 
-          display: {
-            lg: 'none',
-            md: 'none',
-            sm: "block",
-            xs: "block"
-          },
-          width: "100%",
-          height: "100vh" 
+    
+      <Box
+        sx={{
+          width: "100vw",
+          height: "100% !important",
+          backgroundColor: "#F5F5F5",
+          overflowY: "auto",
         }}
       >
-        <TopHeader />
+        <Box // web and tab view
+          sx={{ 
+            display: {
+              lg: 'flex',
+              md: 'flex',
+              sm: "none",
+              xs: "none"
+            },
+            width: "100%",
+            height: "100vh" 
+          }}>
+          <CssBaseline />
 
-        {children}
+          <Drawer variant="permanent" open={open}>
+            <DrawerHeader
+              sx={{
+                display: "flex",
+                justifyContent: "center"
+              }}
+            >
+              {open ? 
+                <Box sx={{ width: { lg: "11.4rem", md: "10rem" }}}>
+                  <Image
+                    src={Logo}
+                    alt="client logo"
+                  />
+                </Box> :
+                <Image 
+                  src={MiniLogo}
+                  alt="client Mini logo"
+                />}
+            </DrawerHeader>
 
-        <Navbar navState={navState} setNavState={setNavState} />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                height: '100vh'
+              }}
+            >
+              <Box>
+                <List>
+                  {['Dashboard'].map((text) => (
+                    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                      <ListItemButton
+                        sx={{
+                          minHeight: 48,
+                          justifyContent: open ? 'initial' : 'center',
+                          px: 2.5,
+                          backgroundColor: "#0B4CCB",
+                          "&:hover": {
+                            backgroundColor: "#0B4CCB !important"
+                          }
+                        }}
+                      >
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: open ? 3 : 'auto',
+                            justifyContent: 'center',
+                            color: "white"
+                          }}
+                        >
+                          <DashboardIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={text} sx={{ opacity: open ? 1 : 0, color: "white" }} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+            </Box>
+          </Drawer>
+
+          <AppBar position="fixed" open={open}>
+            <Toolbar>
+              <IconButton 
+                onClick={handleDrawerAction}
+                sx={{
+                  border: "1px solid black",
+                  borderRadius: "50%",
+                  marginRight: "1.2rem"
+                }}
+              >
+                {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              </IconButton>
+              
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-end"
+                }}
+              >
+                <ProfileOrLogout />
+              </Box>
+            </Toolbar>
+          </AppBar>
+
+          <Box component="main" sx={{ flexGrow: 1, p: 3, width: "100%", height: '100vh', backgroundColor: "#F5F5F5"}}>
+            
+            <DrawerHeader />
+            
+            {children}
+          </Box>
+        </Box>
+
+        <Box              // mobile view
+          sx={{ 
+            display: {
+              lg: 'none',
+              md: 'none',
+              sm: "block",
+              xs: "block"
+            },
+            width: "100%",
+            height: "100vh" 
+          }}
+        >
+          <TopHeader />
+
+          {children}
+
+          <Navbar navState={navState} setNavState={setNavState}  />
+        </Box>
       </Box>
-    </Box>
   );
 }
